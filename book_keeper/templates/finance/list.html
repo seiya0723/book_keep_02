@@ -1,0 +1,37 @@
+{% load humanize %}
+<p>カテゴリ追加フォーム</p>
+
+<form action="{% url 'finance:category' %}" method="POST">
+    {% csrf_token %}
+    <div><input type="text" name="name" placeholder="カテゴリ名"></div>
+    <div>収入フラグ<input type="checkbox" name="income"></div>
+    <input type="submit" value="送信">
+</form>
+
+<p>収支入力フォーム</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <select name="category">
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="pay_dt" readonly>
+    <input type="number" name="value" value="0">
+    <input type="submit" value="送信">
+</form>
+
+<table>
+    <tbody>
+        {% for balance in balances %}
+        <tr>
+            <td>{{ balance.dt }}</td>
+            <td>{{ balance.pay_dt }}</td>
+            <td>{{ balance.category.name }}</td>
+            <td>{{ balance.value|intcomma }}円</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+

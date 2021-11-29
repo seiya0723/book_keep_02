@@ -1,0 +1,50 @@
+{% load humanize %}
+<!--カレンダー-->
+<form action="" method="GET">
+    <select name="year">
+        <option value=""></option>
+    </select>
+    <select name="month">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
+</form>
+
+<table class="calender">
+    <thead>
+        <tr class="calender_head">
+            <td>日</td>
+            <td>月</td>
+            <td>火</td>
+            <td>水</td>
+            <td>木</td>
+            <td>金</td>
+            <td>土</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for week_date in month_date %}
+        <tr>
+            {% for day in week_date %}
+            <td>
+                <div>{{ day.day }}</div>
+                <div>{{ day.income|default:""|intcomma }}</div>
+                <div>{{ day.spending|default:""|intcomma }}</div>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
